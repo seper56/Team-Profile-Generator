@@ -19,11 +19,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GregPetropoulos/Team-Profile-Generator.git"
+    "url": "https://github.com/seper56/Team-Profile-Generator"
   },
   "keywords": [],
   "bugs": {
-    "url": "https://github.com/GregPetropoulos/Team-Profile-Generator/issues"
+    "url": "https://github.com/seper56/Team-Profile-Generator/issues"
   },
-  "homepage": "https://github.com/GregPetropoulos/Team-Profile-Generator#readme"
+  "homepage": ""
 }
