@@ -1,18 +1,19 @@
-import { prompt } from "inquirer";
-import { writeFileSync } from "fs";
-import generateTeam from "./src/page-template.js";
+const inquirer = require("inquirer");
+const fs = require("fs");
+const generateTeam = require("./src/page-template.js");
 
+// lib modules
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
+const Manager = require("./lib/Manager");
 
-import Engineer from "./lib/Engineer";
-import Intern from "./lib/Intern";
-import Manager from "./lib/Manager";
-
-
+// Array for answers to questions
 const newStaffMemberData = [];
 
-
+// Array object questions asked in CLI to user
 const questions = async () => {
-  const answers = await prompt([
+  const answers = await inquirer
+    .prompt([
       {
         type: "input",
         message: "What is your name?",
@@ -38,9 +39,11 @@ const questions = async () => {
 
 
     
-  
+    //  console.log(answers);
+      // if manager selected, answer these specific question
       if (answers.role === "Manager") {
-        const managerAns = await prompt([
+        const managerAns = await inquirer
+          .prompt([
             {
               type: "input",
               message: "What is your office number",
@@ -55,9 +58,10 @@ const questions = async () => {
           );
           newStaffMemberData.push(newManager);
           
-     
+        // if engineer selected answer these set of questions
       } else if (answers.role === "Engineer") {
-        const githubAns = await prompt([
+        const githubAns = await inquirer
+          .prompt([
             {
               type: "input",
               message: "What is your GitHub user name?",
@@ -72,9 +76,10 @@ const questions = async () => {
             );
             newStaffMemberData.push(newEngineer);
           
-     
+        // if intern selected answer these set of questions
       } else if (answers.role === "Intern") {
-        const internAns = await prompt([
+        const internAns = await inquirer
+          .prompt([
             {
               type: "input",
               message: "What university did you attend?",
@@ -91,13 +96,14 @@ const questions = async () => {
           newStaffMemberData.push(newIntern);          
       } 
 
-}; 
+}; //end of questions function
 
 async function promptQuestions() {
   await questions()
     
   
-  const addMemberAns = await prompt([
+  const addMemberAns = await inquirer
+    .prompt([
       {
         name:'addMember',
         type: 'list',
@@ -116,7 +122,7 @@ promptQuestions();
 
 function createTeam () {
   console.log("new guy", newStaffMemberData)
-  writeFileSync(
+  fs.writeFileSync(
     "./output/index.html",
     generateTeam(newStaffMemberData),
     "utf-8"
