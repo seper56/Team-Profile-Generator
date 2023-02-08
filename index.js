@@ -1,19 +1,18 @@
-const inquirer = require("inquirer");
-const fs = require("fs");
-const generateTeam = require("./src/page-template.js");
+import { prompt } from "inquirer";
+import { writeFileSync } from "fs";
+import generateTeam from "./src/page-template.js";
 
 
-const Engineer = require("./lib/Engineer");
-const Intern = require("./lib/Intern");
-const Manager = require("./lib/Manager");
+import Engineer from "./lib/Engineer";
+import Intern from "./lib/Intern";
+import Manager from "./lib/Manager";
 
 
 const newStaffMemberData = [];
 
 
 const questions = async () => {
-  const answers = await inquirer
-    .prompt([
+  const answers = await prompt([
       {
         type: "input",
         message: "What is your name?",
@@ -41,8 +40,7 @@ const questions = async () => {
     
   
       if (answers.role === "Manager") {
-        const managerAns = await inquirer
-          .prompt([
+        const managerAns = await prompt([
             {
               type: "input",
               message: "What is your office number",
@@ -59,8 +57,7 @@ const questions = async () => {
           
      
       } else if (answers.role === "Engineer") {
-        const githubAns = await inquirer
-          .prompt([
+        const githubAns = await prompt([
             {
               type: "input",
               message: "What is your GitHub user name?",
@@ -77,8 +74,7 @@ const questions = async () => {
           
      
       } else if (answers.role === "Intern") {
-        const internAns = await inquirer
-          .prompt([
+        const internAns = await prompt([
             {
               type: "input",
               message: "What university did you attend?",
@@ -101,8 +97,7 @@ async function promptQuestions() {
   await questions()
     
   
-  const addMemberAns = await inquirer
-    .prompt([
+  const addMemberAns = await prompt([
       {
         name:'addMember',
         type: 'list',
@@ -121,7 +116,7 @@ promptQuestions();
 
 function createTeam () {
   console.log("new guy", newStaffMemberData)
-  fs.writeFileSync(
+  writeFileSync(
     "./output/index.html",
     generateTeam(newStaffMemberData),
     "utf-8"
