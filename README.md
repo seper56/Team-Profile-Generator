@@ -27,8 +27,9 @@
   
   
 ---
-## Visuals:
-  ![]()
+## Demo:
+https://bootcampspot.instructuremedia.com/embed/c24b25d2-3a55-42ab-bc4e-7ae7bfc274c0
+
 ---
 ## Installation:
   The user should clone the repository from GitHub and download Node. This application also requires a file system and inquirer module. If testing is required, this application uses Jest
